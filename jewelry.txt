@@ -1,0 +1,40 @@
+PAGES
+	- Home
+	- Login
+	- Signup
+	- Cart
+	- Product Details
+	- Billing
+	- Admin (Hidden)
+		> Validation
+		> CRUD - Admins
+		> CRUD - Products
+	- Error
+Home
+	* Navbar (Home, Login, Signup, Cart)
+	* Carousel
+	* Search Bar + Button
+	* Product Cards
+	* Footer
+Login
+	* Navbar (Home, Login, Signup, Cart)
+	* Form
+	* Footer
+Signup
+	* Navbar (Home, Login, Signup, Cart)
+	* Form
+	* Footer
+Cart
+	* Navbar
+	* Products in Cart
+	* Footer
+Product Details
+	* Navbar
+	* Image + Details
+	* Footer
+Billing
+	* Navbar (Home, Login, Signup, Cart)
+	* Payment Options
+	* Footer
+Error
+	* 404 - Error page
