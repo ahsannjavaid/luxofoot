@@ -1,1 +1,1 @@
-This demo project was created to learn the GitHub basics.
+This demo project was created to learn the GitLab basics.
