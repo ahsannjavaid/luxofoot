@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { carouselImages } from '../../helper/CarouselImages'
+import { carouselImageStyle } from './style'
 
 const Carousel = () => {
   const [activeCarousel, setActiveCarousel] = useState(0)
@@ -19,7 +20,7 @@ const Carousel = () => {
         {
           carouselImages.map((x, ind) =>
             <div key={ind} className={`carousel-item ${!ind ? "active" : ""}`}>
-              <img src={x} className="d-block w-100 carousel-images" alt={ind} />
+              <img src={x} style={carouselImageStyle} className="d-block w-100" alt={ind} />
             </div>
           )
         }

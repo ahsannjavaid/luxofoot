@@ -4,15 +4,6 @@
   background-attachment: fixed;
   background-size: cover;
 }
-.card,
-.card-img-top,
-.carousel-images {
-  border-radius: 20px;
-}
-
-.carousel-images {
-  height: 500px;
-}
 
 @media only screen and (max-width: 1000px) {
   .carousel-images {

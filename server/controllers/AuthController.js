@@ -114,7 +114,7 @@ export const loginUser = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "User login successfully!",
-      user,
+      data: user,
       token,
     });
   } catch (error) {
