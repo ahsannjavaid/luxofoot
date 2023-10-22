@@ -1,15 +1,14 @@
 import React from 'react';
-import ProductCard from '../../components/Product Card/ProductCard';
+import ProductCard from '../../components/product-card/ProductCard';
 import { products } from '../../helper/Products';
-import Carousel from '../../components/Carousel/Carousel';
+import Carousel from '../../components/carousel/Carousel';
 import Layout from '../../components/Layout';
 
 const Home = () => {
   console.log(products);
   return (
     <Layout>
-      <div className='bg-image'>
-        <div className='container pt-5'>
+      <div className='container pt-5'>
           <Carousel />
           <div className='row mt-5'>
             {
@@ -28,7 +27,6 @@ const Home = () => {
             }
           </div>
         </div>
-      </div>
     </Layout>
   )
 }

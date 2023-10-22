@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import { fetchResponse } from "../../api/service";
 import { userEndpoints } from "../../api/endpoints/userEndpoints";
-import LoadingSpinner from "../../components/loading_spinner/LoadingSpinner";
-import GeneralCard from "../../components/general_card/GeneralCard";
+import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner";
+import GeneralCard from "../../components/general-card/GeneralCard";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { toastErrorObject, toastSuccessObject } from "../../helper/utility";
 
 const Login = () => {
@@ -24,7 +24,11 @@ const Login = () => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const res = await fetchResponse(userEndpoints.loginUser(), 1, loginDetails);
+      const res = await fetchResponse(
+        userEndpoints.loginUser(),
+        1,
+        loginDetails
+      );
       const data = res.data;
       if (!res.success) {
         toast.error(res.message, toastErrorObject);
@@ -70,7 +74,9 @@ const Login = () => {
             }
             required
           />
-          <button className="btn btn-sm btn-dark">Login</button>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-sm btn-dark">Login</button>
+          </div>
         </form>
       </GeneralCard>
     </Layout>

@@ -5,7 +5,6 @@ export default function GeneralCard({ header, children }) {
   return (
     <div
       style={generalCardContainerStyle}
-      className="d-flex justify-content-center align-items-center"
     >
       <div className="card shadow" style={generalCardStyle}>
         <div className="card-header text-center" style={generalCardHeaderStyle}>{header}</div>
