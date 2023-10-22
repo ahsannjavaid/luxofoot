@@ -1,6 +1,6 @@
-export const generalCardContainerStyle = {
-  margin: "20px"
-};
+// export const generalCardContainerStyle = {
+//   margin: "20px"
+// };
 
 export const generalCardStyle = {
   pointerEvents: "auto",

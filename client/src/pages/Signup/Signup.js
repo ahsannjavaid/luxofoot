@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import Layout from '../../components/Layout'
-import GeneralCard from '../../components/general-card/GeneralCard'
-import { useNavigate } from 'react-router-dom';
-import { fetchResponse } from '../../api/service';
-import { userEndpoints } from '../../api/endpoints/userEndpoints';
-import { toastErrorObject, toastSuccessObject } from '../../helper/utility';
-import { toast } from 'react-toastify';
-import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
+import React, { useState } from "react";
+import Layout from "../../components/Layout";
+import GeneralCard from "../../components/general-card/GeneralCard";
+import { useNavigate } from "react-router-dom";
+import { fetchResponse } from "../../api/service";
+import { userEndpoints } from "../../api/endpoints/userEndpoints";
+import { toastErrorObject, toastSuccessObject } from "../../helper/utility";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Signup = () => {
     setIsLoading(true);
     try {
       const res = await fetchResponse(
-        userEndpoints.loginUser(),
+        userEndpoints.registerUser(),
         1,
         signupDetails
       );
@@ -36,7 +36,7 @@ const Signup = () => {
         return;
       }
       toast.success(res.message, toastSuccessObject);
-      console.log(data);
+      console.log("Log data", data);
       navigate("/login");
     } catch (error) {
       console.log(error);
@@ -52,26 +52,38 @@ const Signup = () => {
     <Layout>
       <GeneralCard header={"Signup"}>
         <form onSubmit={(event) => signup(event)}>
-        <label className="form-label">First Name</label>
-          <input
-            className="form-control mb-4"
-            type="text"
-            value={signupDetails.fname}
-            onChange={(event) =>
-              setSignupDetails({ ...signupDetails, fname: event.target.value })
-            }
-            required
-          />
-          <label className="form-label">Last Name</label>
-          <input
-            className="form-control mb-4"
-            type="text"
-            value={signupDetails.lname}
-            onChange={(event) =>
-              setSignupDetails({ ...signupDetails, lname: event.target.value })
-            }
-            required
-          />
+          <div className="row">
+            <div className="col">
+              <label className="form-label">First Name</label>
+              <input
+                className="form-control mb-4"
+                type="text"
+                value={signupDetails.fname}
+                onChange={(event) =>
+                  setSignupDetails({
+                    ...signupDetails,
+                    fname: event.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+            <div className="col">
+              <label className="form-label">Last Name</label>
+              <input
+                className="form-control mb-4"
+                type="text"
+                value={signupDetails.lname}
+                onChange={(event) =>
+                  setSignupDetails({
+                    ...signupDetails,
+                    lname: event.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+          </div>
           <label className="form-label">Email</label>
           <input
             className="form-control mb-4"
@@ -88,17 +100,23 @@ const Signup = () => {
             type="password"
             value={signupDetails.password}
             onChange={(event) =>
-              setSignupDetails({ ...signupDetails, password: event.target.value })
+              setSignupDetails({
+                ...signupDetails,
+                password: event.target.value,
+              })
             }
             required
           />
-          <label className="form-label">What is your favourite color?</label>
+          <label className="form-label">What is your favourite food?</label>
           <input
             className="form-control mb-4"
             type="text"
             value={signupDetails.securityAnswer}
             onChange={(event) =>
-              setSignupDetails({ ...signupDetails, securityAnswer: event.target.value })
+              setSignupDetails({
+                ...signupDetails,
+                securityAnswer: event.target.value,
+              })
             }
             required
           />
@@ -108,7 +126,7 @@ const Signup = () => {
         </form>
       </GeneralCard>
     </Layout>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

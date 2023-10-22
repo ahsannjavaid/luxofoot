@@ -4,7 +4,7 @@ import JWT from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
   try {
-    const { fname, lname, email, password, securityAnswer } = req.body;
+    const { fname, lname, email, password, securityAnswer } = req.fields;
 
     // validation
     switch (true) {
@@ -40,6 +40,7 @@ export const registerUser = async (req, res) => {
       return res.status(409).send({
         success: false,
         message: "User already exists, please login!",
+        error,
       });
     }
 
@@ -122,6 +123,7 @@ export const loginUser = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Something went wrong while loging in user!",
+      error,
     });
   }
 };
@@ -132,43 +134,79 @@ export const getUsers = async (req, res) => {
     if (users.length) {
       res
         .status(200)
-        .send({ success: true, message: "Users fetched successfully!", count: users.length, data: users });
+        .send({
+          success: true,
+          message: "Users fetched successfully!",
+          count: users.length,
+          data: users,
+        });
     } else {
       res.status(404).send({ success: false, message: "Users not found!" });
     }
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .send({
-        success: false,
-        message: "Something went wrong while getting users!",
-        error,
-      });
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong while getting users!",
+      error,
+    });
   }
 };
 
 export const getSingleUser = async (req, res) => {
-    try {
-      const user = await UserSchema.findById({ _id: req.params.id });
-      if (user) {
-        res
-          .status(200)
-          .send({ success: true, message: "User fetched successfully!", data: user });
-      } else {
-        res.status(404).send({ success: false, message: "User not found!" });
-      }
-    } catch (error) {
-      console.log(error);
+  try {
+    const user = await UserSchema.findById({ _id: req.params.id });
+    if (user) {
       res
-        .status(500)
+        .status(200)
         .send({
-          success: false,
-          message: "Something went wrong while getting user!",
-          error,
+          success: true,
+          message: "User fetched successfully!",
+          data: user,
         });
+    } else {
+      res.status(404).send({ success: false, message: "User not found!" });
     }
-  };
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong while getting user!",
+      error,
+    });
+  }
+};
+
+export const deleteSingleUser = async (req, res) => {
+  try {
+    // destructuring id from URL parameters
+    const { id } = req.params;
+
+    // checking if the book exists
+    const existingBook = await UserSchema.findById(id);
+
+    // deleting the book if it exists
+    if (existingBook) {
+      const result = await UserSchema.findByIdAndDelete(id);
+      res.status(200).send({
+        success: true,
+        message: `The user with name ${result.fname} is deleted successfully!`,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "This user does not exist.",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong while deleting user!",
+      error,
+    });
+  }
+};
 
 export const testProtect = async (req, res) => {
   res.send("Protected Route");

@@ -4,7 +4,8 @@ import {
   getSingleUser,
   loginUser,
   registerUser,
-  testProtect
+  testProtect,
+  deleteSingleUser
 } from "../controllers/AuthController.js";
 import { requireSignIn } from "../middlewares/AuthMiddleware.js";
 
@@ -14,6 +15,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/get-users", getUsers);
 router.get("/get-single-user/:id", getSingleUser);
+router.delete("/delete-single-user/:id", deleteSingleUser);
 router.get("/test-protect", requireSignIn, testProtect);
 
 export default router;
