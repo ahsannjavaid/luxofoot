@@ -6,6 +6,8 @@ import LoadingSpinner from "../../components/loading_spinner/LoadingSpinner";
 import GeneralCard from "../../components/general_card/GeneralCard";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { toastErrorObject, toastSuccessObject } from "../../helper/utility";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,10 +26,16 @@ const Login = () => {
     try {
       const res = await fetchResponse(userEndpoints.loginUser(), 1, loginDetails);
       const data = res.data;
+      if (!res.success) {
+        toast.error(res.message, toastErrorObject);
+        setIsLoading(false);
+        return;
+      }
+      toast.success(res.message, toastSuccessObject);
       console.log(data);
       setUserData(data);
-      setIsLoading(false);
-      if (res.success) navigate("/");
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate("/");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -40,7 +48,7 @@ const Login = () => {
 
   return (
     <Layout>
-      <GeneralCard header={<>Login</>}>
+      <GeneralCard header={"Login"}>
         <form onSubmit={(event) => login(event)}>
           <label className="form-label">Email</label>
           <input

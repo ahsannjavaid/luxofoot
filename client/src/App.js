@@ -7,10 +7,13 @@ import Cart from './pages/Cart/Cart';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import ProductDetails from './pages/Product Details/ProductDetails';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
+    <ToastContainer />
       <Routes>
         <Route exact path='/' element = {<Home />} />
         <Route path='/about-developer' element = {<AboutDeveloper />} />
