@@ -1,8 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { deleteSingleUser } from "../../../helper/admin";
 
-export default function MainTable({ styles, headers, data, deleteSingleUser }) {
+export default function MainTable({ styles, headers, data, setData, setIsLoading }) {
   return (
     <table className={"table " + styles}>
       <thead>
@@ -21,7 +22,7 @@ export default function MainTable({ styles, headers, data, deleteSingleUser }) {
                 <td>{item.lname}</td>
                 <td>{item.email}</td>
                 <td>{item.securityAnswer}</td>
-                <td><FontAwesomeIcon onClick={() => deleteSingleUser(item._id)} className="text-danger click" icon={faTrash} /></td>
+                <td><FontAwesomeIcon onClick={() => deleteSingleUser(item._id, data, setData, setIsLoading)} className="text-danger click" icon={faTrash} /></td>
               </tr>
             );
           })

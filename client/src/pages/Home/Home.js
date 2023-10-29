@@ -8,7 +8,7 @@ const Home = () => {
   console.log(products);
   return (
     <Layout>
-      <div className='container'>
+      <div className='container mt-4'>
           <Carousel />
           <div className='row mt-5'>
             {

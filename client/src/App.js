@@ -9,7 +9,7 @@ import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import ProductDetails from './pages/product-details/ProductDetails';
 import { ToastContainer } from 'react-toastify';
-import Users from './pages/admin/Users';
+import Admin from './pages/admin/Admin';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route path='/signup' element = {<Signup />} />
         <Route path='/cart' element = {<Cart />} />
         <Route path='/product-details/:id' element = {<ProductDetails />} />
-        <Route path='/admin' element = {<Users />} />
+        <Route path='/admin' element = {<Admin />} />
         <Route path='/*' element = {<Error />} />
       </Routes>
     </>

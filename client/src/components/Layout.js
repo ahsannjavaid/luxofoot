@@ -9,9 +9,7 @@ const Layout = ({ children, onCart, noCentering }) => {
     <>
       <Navbar onCart={onCart} />
       <main className={mainClass} style={{ minHeight: "85vh" }}>
-        <div className="p-4">
-          {children}
-        </div>
+        {children}
       </main>
       <Footer />
     </>
