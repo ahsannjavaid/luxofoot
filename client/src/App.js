@@ -1,4 +1,5 @@
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route} from 'react-router-dom';
 import Home from './pages/home/Home';
 import AboutDeveloper from './pages/about-developer/AboutDeveloper';
@@ -8,7 +9,6 @@ import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import ProductDetails from './pages/product-details/ProductDetails';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Users from './pages/admin/Users';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route path='/signup' element = {<Signup />} />
         <Route path='/cart' element = {<Cart />} />
         <Route path='/product-details/:id' element = {<ProductDetails />} />
-        <Route path='/users' element = {<Users />} />
+        <Route path='/admin' element = {<Users />} />
         <Route path='/*' element = {<Error />} />
       </Routes>
     </>

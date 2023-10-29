@@ -7,7 +7,7 @@ import GeneralCard from "../../components/general-card/GeneralCard";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { toastErrorObject, toastSuccessObject } from "../../helper/utility";
+import { toastErrorObject, toastSuccessObject } from "../../helper/toast";
 
 const Login = () => {
   const navigate = useNavigate();

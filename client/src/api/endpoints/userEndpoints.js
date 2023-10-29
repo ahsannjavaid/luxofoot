@@ -8,4 +8,8 @@ export const userEndpoints = {
   registerUser: () => `${BASE_URL}${title}register`,
 
   getUsers: () => `${BASE_URL}${title}get-users`,
+
+  deleteSingleUser: (id) => `${BASE_URL}${title}delete-single-user/${id}`,
+
+  deleteUsers: () => `${BASE_URL}${title}delete-users`,
 };

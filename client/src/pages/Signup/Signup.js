@@ -4,7 +4,7 @@ import GeneralCard from "../../components/general-card/GeneralCard";
 import { useNavigate } from "react-router-dom";
 import { fetchResponse } from "../../api/service";
 import { userEndpoints } from "../../api/endpoints/userEndpoints";
-import { toastErrorObject, toastSuccessObject } from "../../helper/utility";
+import { toastErrorObject, toastSuccessObject } from "../../helper/toast";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner";
 

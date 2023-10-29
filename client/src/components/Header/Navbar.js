@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { toast } from 'react-toastify';
-import { toastSuccessObject } from "../../helper/utility";
+import { toastSuccessObject } from "../../helper/toast";
 
 const Navbar = ({ onCart }) => {
   const { userData, setUserData } = useAuth();

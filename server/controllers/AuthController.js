@@ -141,7 +141,7 @@ export const getUsers = async (req, res) => {
           data: users,
         });
     } else {
-      res.status(404).send({ success: false, message: "Users not found!" });
+      res.status(404).send({ success: true, message: "Users not found!" });
     }
   } catch (error) {
     console.log(error);
@@ -182,11 +182,11 @@ export const deleteSingleUser = async (req, res) => {
     // destructuring id from URL parameters
     const { id } = req.params;
 
-    // checking if the book exists
-    const existingBook = await UserSchema.findById(id);
+    // checking if the user exists
+    const existingUser = await UserSchema.findById(id);
 
-    // deleting the book if it exists
-    if (existingBook) {
+    // deleting the user if it exists
+    if (existingUser) {
       const result = await UserSchema.findByIdAndDelete(id);
       res.status(200).send({
         success: true,
@@ -203,6 +203,30 @@ export const deleteSingleUser = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Something went wrong while deleting user!",
+      error,
+    });
+  }
+};
+
+export const deleteUsers = async (req, res) => {
+  try {
+    const users = await UserSchema.find();
+    if (!users.length) {
+      return res.status(404).send({
+        success: false,
+        message: "Users do not exist.",
+      });
+    }
+    const result = await UserSchema.deleteMany();
+    res.status(200).send({
+      success: true,
+      message: "All users deleted successfully!",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong while deleting all users!",
       error,
     });
   }
