@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner";
-import MainTable from "../../components/table/users/MainTable";
 import ConfirmationModal from "../../components/modal/ConfirmationModal";
-import { fetchUsers, deleteUsers } from "../../helper/admin"; // Import the functions from your new file
-import { deleteAllButtonStyle } from "./style";
+import { deleteRecords, fetchData } from "../../helper/admin";
+import WideButton from "../../components/button/WideButton";
+import DeleteFunctionalityTable from "../../components/table/DeleteFunctionalityTable";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -11,7 +11,7 @@ export default function Users() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetchUsers(setUsers, setIsLoading);
+    fetchData(setUsers, setIsLoading, 0);
   }, []);
 
   if (isLoading) {
@@ -21,15 +21,13 @@ export default function Users() {
   return (
     <div>
       {users?.length ? (
-          <button
+          <WideButton
             onClick={() => setShowModal(true)}
-            className="btn btn-sm btn-danger w-100"
-            style={deleteAllButtonStyle}
-          >
-            Delete All
-          </button>
+            btnColor={"danger"}
+            name={"Delete All"}
+          />
       ) : null}
-      <MainTable
+      <DeleteFunctionalityTable
         styles={"table-sm table-bordered table-striped text-center"}
         headers={[
           "First Name",
@@ -41,12 +39,13 @@ export default function Users() {
         data={users}
         setData={setUsers}
         setIsLoading={setIsLoading}
+        req={0}
       />
       <ConfirmationModal
         showModal={showModal}
         setShowModal={setShowModal}
         message={"Are you sure to delete all the Users?"}
-        action={() => deleteUsers(setShowModal, setIsLoading, setUsers)}
+        action={() => deleteRecords(setShowModal, setIsLoading, setUsers, 0)}
       />
     </div>
   );

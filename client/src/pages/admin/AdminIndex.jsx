@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import Users from "./Users";
 import AdminSidebar from "../../components/sidebar/Sidebar";
 import { adminLayoutStyle, sidebarFlexStyle, spaceFlexStyle } from "./style";
+import { Outlet } from "react-router-dom";
 
 export default function Admin() {
   return (
@@ -12,7 +12,7 @@ export default function Admin() {
           <AdminSidebar name={"admin"} />
         </div>
         <div style={spaceFlexStyle}>
-          <Users />
+          <Outlet />
         </div>
       </div>
     </Layout>

@@ -12,7 +12,3 @@ export const sidebarFlexStyle = {
 export const spaceFlexStyle = {
   flex: "8",
 };
-
-export const deleteAllButtonStyle = {
-  borderRadius: "0"
-}

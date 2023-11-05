@@ -9,7 +9,9 @@ import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import ProductDetails from './pages/product/ProductDetails';
 import { ToastContainer } from 'react-toastify';
-import Admin from './pages/admin/Admin';
+import AdminIndex from './pages/admin/AdminIndex';
+import Users from './pages/admin/Users';
+import Admins from './pages/admin/Admins';
 
 function App() {
   return (
@@ -22,7 +24,10 @@ function App() {
         <Route path='/signup' element = {<Signup />} />
         <Route path='/cart' element = {<Cart />} />
         <Route path='/product-details/:id' element = {<ProductDetails />} />
-        <Route path='/admin' element = {<Admin />} />
+        <Route path='/admin' element = {<AdminIndex />}>
+          <Route path='users' element={<Users />} />
+          <Route path='admins' element={<Admins />} />
+        </Route>
         <Route path='/*' element = {<Error />} />
       </Routes>
     </>
