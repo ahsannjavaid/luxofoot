@@ -23,12 +23,13 @@
 
 /* Sidebar */
 .sidebar-item {
+  --intensity: 1; /* Default intensity value */
   padding: 0 4px;
   border-radius: 5px;
   transition: background-color 0.1s;
 }
 .sidebar-item:hover {
-  background-color: gray;
+  background-color: rgba(128, 128, 128, var(--intensity)); /* Use the intensity variable */
   padding: 0 4px;
   border-radius: 5px;
   cursor: pointer;

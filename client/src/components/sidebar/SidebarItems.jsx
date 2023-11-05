@@ -24,6 +24,7 @@ export default function SidebarItem({ list, name }) {
           <li
             key={item.id}
             className="sidebar-item"
+            style={{ '--intensity': '0.6' }}
             onClick={
               item.path
                 ? () => navigate(item.path)
