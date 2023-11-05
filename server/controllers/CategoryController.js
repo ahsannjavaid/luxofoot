@@ -1,5 +1,5 @@
 import slugify from "slugify";
-import CategorySchema from "../models/CategorySchema.js";
+import CategorySchema from "../models/categorySchema.js";
 
 export const addCategory = async (req, res) => {
   try {

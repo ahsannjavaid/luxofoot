@@ -3,6 +3,7 @@ import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner";
 import MainTable from "../../components/table/users/MainTable";
 import ConfirmationModal from "../../components/modal/ConfirmationModal";
 import { fetchUsers, deleteUsers } from "../../helper/admin"; // Import the functions from your new file
+import { deleteAllButtonStyle } from "./style";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -20,14 +21,13 @@ export default function Users() {
   return (
     <div>
       {users?.length ? (
-        <div className="text-end mb-2">
           <button
             onClick={() => setShowModal(true)}
-            className="btn btn-sm btn-danger"
+            className="btn btn-sm btn-danger w-100"
+            style={deleteAllButtonStyle}
           >
             Delete All
           </button>
-        </div>
       ) : null}
       <MainTable
         styles={"table-sm table-bordered table-striped text-center"}

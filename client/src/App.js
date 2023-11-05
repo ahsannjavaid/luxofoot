@@ -7,7 +7,7 @@ import Error from './pages/error/Error';
 import Cart from './pages/cart/Cart';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
-import ProductDetails from './pages/product-details/ProductDetails';
+import ProductDetails from './pages/product/ProductDetails';
 import { ToastContainer } from 'react-toastify';
 import Admin from './pages/admin/Admin';
 

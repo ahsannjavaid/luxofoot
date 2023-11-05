@@ -1,10 +1,10 @@
-import UserSchema from "../models/userSchema.js";
+import adminSchema from "../models/adminSchema.js";
 import { ComparePassword, HashPassword } from "../helpers/passwordBcrypt.js";
 import JWT from "jsonwebtoken";
 
-export const registerUser = async (req, res) => {
+export const registerAdmin = async (req, res) => {
   try {
-    const { fname, lname, email, password, securityAnswer } = req.fields;
+    const { fname, lname, email, password, post, securityAnswer } = req.fields;
 
     // validation
     switch (true) {
@@ -25,6 +25,11 @@ export const registerUser = async (req, res) => {
           success: false,
           message: "Please provide 'password' field.",
         });
+        case !post:
+        return res.status(206).send({
+          success: false,
+          message: "Please provide 'post' field.",
+        });
       case !securityAnswer:
         return res.status(206).send({
           success: false,
@@ -34,12 +39,12 @@ export const registerUser = async (req, res) => {
         break;
     }
 
-    // existing user check - from database
-    const existingUser = await UserSchema.findOne({ email });
-    if (existingUser) {
+    // existing admin check - from database
+    const existingAdmin = await adminSchema.findOne({ email });
+    if (existingAdmin) {
       return res.status(409).send({
         success: false,
-        message: "User already exists, please login!",
+        message: "Admin already exists, please login!",
         error,
       });
     }
@@ -48,30 +53,31 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await HashPassword(password);
 
     // sending data into database
-    const user = await new UserSchema({
+    const admin = await new adminSchema({
       fname,
       lname,
       email,
       password: hashedPassword,
+      post,
       securityAnswer,
     }).save();
 
     // success in registration
     res.status(200).send({
       success: true,
-      message: "User registered successfully!",
-      user,
+      message: "Admin registered successfully!",
+      admin,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Something went wrong while registering user!",
+      message: "Something went wrong while registering admin!",
     });
   }
 };
 
-export const loginUser = async (req, res) => {
+export const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.fields;
 
@@ -89,17 +95,17 @@ export const loginUser = async (req, res) => {
       });
     }
 
-    // finding user based on email - from database
-    const user = await UserSchema.findOne({ email });
-    if (!user) {
+    // finding admin based on email - from database
+    const admin = await adminSchema.findOne({ email });
+    if (!admin) {
       return res.status(404).send({
         success: false,
-        message: "User does not exist, please register!",
+        message: "Admin does not exist, please register!",
       });
     }
 
     // comparing with hashed password
-    const matched = await ComparePassword(password, user.password);
+    const matched = await ComparePassword(password, admin.password);
     if (!matched) {
       return res.status(401).send({
         success: false,
@@ -108,131 +114,126 @@ export const loginUser = async (req, res) => {
     }
 
     // JWT
-    const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    const token = await JWT.sign({ _id: admin._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
     res.status(200).send({
       success: true,
-      message: "User logged in successfully!",
-      data: user,
+      message: "Admin logged in successfully!",
+      data: admin,
       token,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Something went wrong while loging in user!",
+      message: "Something went wrong while loging in admin!",
       error,
     });
   }
 };
 
-export const getUsers = async (req, res) => {
+export const getAdmins = async (req, res) => {
   try {
-    const users = await UserSchema.find();
-    if (users.length) {
+    const admins = await adminSchema.find();
+    if (admins.length) {
       res
         .status(200)
         .send({
           success: true,
-          message: "Users fetched successfully!",
-          count: users.length,
-          data: users,
+          message: "Admins fetched successfully!",
+          count: admins.length,
+          data: admins,
         });
     } else {
-      res.status(404).send({ success: true, message: "Users not found!" });
+      res.status(404).send({ success: true, message: "Admins not found!" });
     }
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Something went wrong while getting users!",
+      message: "Something went wrong while getting admins!",
       error,
     });
   }
 };
 
-export const getSingleUser = async (req, res) => {
+export const getSingleAdmin = async (req, res) => {
   try {
-    const user = await UserSchema.findById({ _id: req.params.id });
-    if (user) {
+    const admin = await adminSchema.findById({ _id: req.params.id });
+    if (admin) {
       res
         .status(200)
         .send({
           success: true,
-          message: "User fetched successfully!",
-          data: user,
+          message: "Admin fetched successfully!",
+          data: admin,
         });
     } else {
-      res.status(404).send({ success: false, message: "User not found!" });
+      res.status(404).send({ success: false, message: "Admin not found!" });
     }
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Something went wrong while getting user!",
+      message: "Something went wrong while getting admin!",
       error,
     });
   }
 };
 
-export const deleteSingleUser = async (req, res) => {
+export const deleteSingleAdmin = async (req, res) => {
   try {
     // destructuring id from URL parameters
     const { id } = req.params;
 
-    // checking if the user exists
-    const existingUser = await UserSchema.findById(id);
+    // checking if the admin exists
+    const existingAdmin = await adminSchema.findById(id);
 
-    // deleting the user if it exists
-    if (existingUser) {
-      const result = await UserSchema.findByIdAndDelete(id);
+    // deleting the admin if it exists
+    if (existingAdmin) {
+      const result = await adminSchema.findByIdAndDelete(id);
       res.status(200).send({
         success: true,
-        message: `The user with name ${result.fname} is deleted successfully!`,
+        message: `The admin with name ${result.fname} is deleted successfully!`,
       });
     } else {
       res.status(404).send({
         success: false,
-        message: "This user does not exist.",
+        message: "This admin does not exist.",
       });
     }
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Something went wrong while deleting user!",
+      message: "Something went wrong while deleting admin!",
       error,
     });
   }
 };
 
-export const deleteUsers = async (req, res) => {
+export const deleteAdmins = async (req, res) => {
   try {
-    const users = await UserSchema.find();
-    if (!users.length) {
+    const admins = await adminSchema.find();
+    if (!admins.length) {
       return res.status(404).send({
         success: false,
         message: "Users do not exist.",
       });
     }
-    const result = await UserSchema.deleteMany();
+    const result = await adminSchema.deleteMany();
     res.status(200).send({
       success: true,
-      message: "All users deleted successfully!",
+      message: "All admins deleted successfully!",
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Something went wrong while deleting all users!",
+      message: "Something went wrong while deleting all admins!",
       error,
     });
   }
-};
-
-export const testProtect = async (req, res) => {
-  res.send("Protected Route");
-  // I can access all the details of user from database through req.user._id
 };

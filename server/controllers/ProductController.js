@@ -1,5 +1,5 @@
 import slugify from "slugify";
-import ProductSchema from "../models/ProductSchema.js";
+import ProductSchema from "../models/productSchema.js";
 import fs from "fs";
 
 export const addProduct = async (req, res) => {
