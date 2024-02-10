@@ -5,6 +5,7 @@
 // }
 
 export async function fetchResponse(url, type, bodyData) {
+  var token = localStorage.getItem("token");
   let options;
   switch (type) {
     case 0:
@@ -32,17 +33,23 @@ export async function fetchResponse(url, type, bodyData) {
       };
       break;
     case 4:
-    options = {
-      method: "POST",
-      body: bodyData,
-    };
+      options = {
+        method: "POST",
+        body: bodyData,
+      };
       break;
-      case 5:
-        options = {
-          method: "PUT",
-          body: bodyData,
-        };
-          break;
+    case 5:
+      options = {
+        method: "PUT",
+        body: bodyData,
+      };
+      break;
+    case 6:
+      options = {
+        method: "GET",
+        headers: { Authorization: token },
+      };
+      break;
     default:
       return;
   }
@@ -50,8 +57,7 @@ export async function fetchResponse(url, type, bodyData) {
     const res = await fetch(url, options);
     if (!res.ok) {
       console.log("Network response was not OK.");
-    }
-    else {
+    } else {
       console.log("Response fetched successfully!");
     }
     const jsonData = await res.json();

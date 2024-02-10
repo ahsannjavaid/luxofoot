@@ -39,6 +39,7 @@ const Login = () => {
       console.log("Log data", data);
       setUserData(data);
       localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("token", JSON.stringify(res.token));
       navigate("/");
     } catch (error) {
       console.log(error);

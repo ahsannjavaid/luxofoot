@@ -8,7 +8,8 @@ export async function fetchData(setData, setIsLoading, req) {
   try {
     let res;
     if (req) res = await fetchResponse(adminEndpoints.getAdmins(), 0, null);
-    else res = await fetchResponse(userEndpoints.getUsers(), 0, null);
+    // else res = await fetchResponse(userEndpoints.getUsers(), 0, null);
+    else res = await fetchResponse(userEndpoints.getUsers(), 6, null);
     const resData = res.data;
     if (!res.success) {
       toast.error(res.message, toastErrorObject);
