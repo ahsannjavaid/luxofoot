@@ -4,15 +4,18 @@ import ConfirmationModal from "../../components/modal/ConfirmationModal";
 import { deleteRecords, fetchData } from "../../helper/admin";
 import WideButton from "../../components/button/WideButton";
 import DeleteFunctionalityTable from "../../components/table/DeleteFunctionalityTable";
+import { useAuth } from "../../context/authContext";
 
 export default function Users() {
+  const { auth } = useAuth();
+
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetchData(setUsers, setIsLoading, 0);
-  }, []);
+    fetchData(setUsers, setIsLoading, 0, auth);
+  }, [auth]);
 
   if (isLoading) {
     return <LoadingSpinner />;

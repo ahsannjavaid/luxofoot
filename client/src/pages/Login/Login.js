@@ -12,7 +12,7 @@ import { toastErrorObject, toastSuccessObject } from "../../helper/toast";
 const Login = () => {
   const navigate = useNavigate();
 
-  const { setUserData } = useAuth();
+  const { setUserData, setAuth } = useAuth();
 
   const [loginDetails, setLoginDetails] = useState({
     email: "",
@@ -30,6 +30,7 @@ const Login = () => {
         loginDetails
       );
       const data = res.data;
+      const token = res.token;
       if (!res.success) {
         toast.error(res.message, toastErrorObject);
         setIsLoading(false);
@@ -38,8 +39,9 @@ const Login = () => {
       toast.success(res.message, toastSuccessObject);
       console.log("Log data", data);
       setUserData(data);
-      localStorage.setItem("user", JSON.stringify(data));
-      localStorage.setItem("token", JSON.stringify(res.token));
+      localStorage.setItem("token", token);
+      setAuth(token);
+
       navigate("/");
     } catch (error) {
       console.log(error);

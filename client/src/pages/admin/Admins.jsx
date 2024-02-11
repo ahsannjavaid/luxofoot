@@ -4,15 +4,18 @@ import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
 import { deleteRecords, fetchData } from '../../helper/admin';
 import WideButton from '../../components/button/WideButton';
 import DeleteFunctionalityTable from '../../components/table/DeleteFunctionalityTable';
+import { useAuth } from '../../context/authContext';
 
 export default function Admins() {
+    const { auth } = useAuth();
+
     const [admins, setAdmins] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
   
     useEffect(() => {
-      fetchData(setAdmins, setIsLoading, 1);
-    }, []);
+      fetchData(setAdmins, setIsLoading, 1, auth);
+    }, [auth]);
   
     if (isLoading) {
       return <LoadingSpinner />;

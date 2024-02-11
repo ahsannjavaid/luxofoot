@@ -15,7 +15,7 @@ export const requireSignIn = (req, res, next) => {
         console.log(error)
         res.status(500).send({
             success: false,
-            message: "Something went wrong with token!"
+            message: "Session has expired. Please login again."
         })
     }
 }

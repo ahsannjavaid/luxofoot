@@ -5,11 +5,12 @@ import { toast } from 'react-toastify';
 import { toastSuccessObject } from "../../helper/toast";
 
 const Navbar = ({ onCart }) => {
-  const { userData, setUserData } = useAuth();
+  const { auth, setUserData, setAuth } = useAuth();
 
   function logout() {
-    localStorage.removeItem("user");
     setUserData(null);
+    localStorage.removeItem("token");
+    setAuth(null);
     toast.success("Logged out successfully!", toastSuccessObject);
   }
 
@@ -42,7 +43,7 @@ const Navbar = ({ onCart }) => {
               <NavLink className="nav-item nav-link" to={"/signup"}>
                 SIGNUP
               </NavLink>
-              {userData ? (
+              {auth ? (
                 <Link onClick={logout} className="nav-item nav-link" to={"/"}>
                   LOGOUT
                 </Link>

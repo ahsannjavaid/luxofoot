@@ -5,7 +5,6 @@
 // }
 
 export async function fetchResponse(url, type, bodyData) {
-  var token = localStorage.getItem("token");
   let options;
   switch (type) {
     case 0:
@@ -47,7 +46,7 @@ export async function fetchResponse(url, type, bodyData) {
     case 6:
       options = {
         method: "GET",
-        headers: { Authorization: token },
+        headers: { Authorization: bodyData },
       };
       break;
     default:

@@ -4,12 +4,13 @@ import { fetchResponse } from "../api/service";
 import { toastErrorObject, toastSuccessObject } from "./toast";
 import { adminEndpoints } from "../api/endpoints/adminEndpoints";
 
-export async function fetchData(setData, setIsLoading, req) {
+export async function fetchData(setData, setIsLoading, req, auth) {
   try {
     let res;
-    if (req) res = await fetchResponse(adminEndpoints.getAdmins(), 0, null);
+    // if (req) res = await fetchResponse(adminEndpoints.getAdmins(), 0, null);
+    if (req) res = await fetchResponse(adminEndpoints.getAdmins(), 6, auth);
     // else res = await fetchResponse(userEndpoints.getUsers(), 0, null);
-    else res = await fetchResponse(userEndpoints.getUsers(), 6, null);
+    else res = await fetchResponse(userEndpoints.getUsers(), 6, auth);
     const resData = res.data;
     if (!res.success) {
       toast.error(res.message, toastErrorObject);
