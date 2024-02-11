@@ -15,7 +15,8 @@ export default function Admins() {
   
     useEffect(() => {
       fetchData(setAdmins, setIsLoading, 1, auth);
-    }, [auth]);
+      // eslint-disable-next-line
+    }, []);
   
     if (isLoading) {
       return <LoadingSpinner />;

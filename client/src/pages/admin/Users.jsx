@@ -15,7 +15,8 @@ export default function Users() {
 
   useEffect(() => {
     fetchData(setUsers, setIsLoading, 0, auth);
-  }, [auth]);
+    // eslint-disable-next-line
+  }, []);
 
   if (isLoading) {
     return <LoadingSpinner />;

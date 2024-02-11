@@ -34,7 +34,8 @@ export default function Admin() {
       }
     }
     checkAuth();
-  }, [auth, navigate]);
+    // eslint-disable-next-line
+  }, [navigate]);
 
   if (isLoading) <LoadingSpinner />;
   
