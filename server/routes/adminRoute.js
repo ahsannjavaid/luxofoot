@@ -7,7 +7,7 @@ import {
     loginAdmin,
   registerAdmin,
 } from "../controllers/adminController.js";
-import { requireAdminPrivilege, requireSignIn } from "../middlewares/AuthMiddleware.js";
+import { requireAdminPrivilege, requireSignIn } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
