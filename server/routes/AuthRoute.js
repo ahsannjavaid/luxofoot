@@ -8,16 +8,16 @@ import {
   deleteSingleUser,
   deleteUsers
 } from "../controllers/AuthController.js";
-import { requireSignIn } from "../middlewares/AuthMiddleware.js";
+import { requireSignIn, requireAdminPrivilege } from "../middlewares/AuthMiddleware.js";
 
 const router = express.Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.get("/get-users", requireSignIn, getUsers);
+router.get("/get-users", requireSignIn, requireAdminPrivilege, getUsers);
 router.get("/get-single-user/:id", getSingleUser);
-router.delete("/delete-single-user/:id", deleteSingleUser);
-router.delete("/delete-users", deleteUsers);
+router.delete("/delete-single-user/:id", requireSignIn, requireAdminPrivilege, deleteSingleUser);
+router.delete("/delete-users", requireSignIn, requireAdminPrivilege, deleteUsers);
 router.get("/test-protect", requireSignIn, testProtect);
 
 export default router;

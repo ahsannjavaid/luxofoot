@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import AdminIndex from './pages/admin/AdminIndex';
 import Users from './pages/admin/Users';
 import Admins from './pages/admin/Admins';
+import ShowProducts from './pages/admin/products/ShowProducts';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/admin' element = {<AdminIndex />}>
           <Route path='users' element={<Users />} />
           <Route path='admins' element={<Admins />} />
+          <Route path='products' element={<ShowProducts />} />
         </Route>
         <Route path='/*' element = {<Error />} />
       </Routes>
