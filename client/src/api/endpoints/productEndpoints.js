@@ -3,5 +3,5 @@ import { BASE_URL } from "../config";
 const title = "product/";
 
 export const productEndpoints = {
-  getProducts: () => `${BASE_URL}${title}get-products`,
+  getProducts: () => `${process.env.REACT_APP_API_URL}${title}get-products`,
 };

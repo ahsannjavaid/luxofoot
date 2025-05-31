@@ -3,13 +3,13 @@ import { BASE_URL } from "../config";
 const title = "auth/";
 
 export const userEndpoints = {
-  loginUser: () => `${BASE_URL}${title}login`,
+  loginUser: () => `${process.env.REACT_APP_API_URL}${title}login`,
 
-  registerUser: () => `${BASE_URL}${title}register`,
+  registerUser: () => `${process.env.REACT_APP_API_URL}${title}register`,
 
-  getUsers: () => `${BASE_URL}${title}get-users`,
+  getUsers: () => `${process.env.REACT_APP_API_URL}${title}get-users`,
 
-  deleteSingleUser: (id) => `${BASE_URL}${title}delete-single-user/${id}`,
+  deleteSingleUser: (id) => `${process.env.REACT_APP_API_URL}${title}delete-single-user/${id}`,
 
-  deleteUsers: () => `${BASE_URL}${title}delete-users`,
+  deleteUsers: () => `${process.env.REACT_APP_API_URL}${title}delete-users`,
 };
