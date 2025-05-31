@@ -8,7 +8,7 @@ import {
   deleteSingleUser,
   deleteUsers
 } from "../controllers/AuthController.js";
-import { requireSignIn, requireAdminPrivilege } from "../middlewares/AuthMiddleware.js";
+import { requireSignIn, requireAdminPrivilege } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
