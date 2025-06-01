@@ -44,8 +44,11 @@ const Login = () => {
       setUserData(data);
       localStorage.setItem("token", token);
       setAuth(token);
-
-      navigate("/");
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
       setIsLoading(false);
