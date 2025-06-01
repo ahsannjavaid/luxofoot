@@ -17,12 +17,12 @@ const Navbar = ({ onCart }) => {
   return (
     <>
       <nav
-        className="navbar navbar-expand-md navbar-dark"
-        style={{ backgroundColor: "black" }}
+        className="navbar navbar-expand-md navbar-light"
+        style={{ backgroundColor: "white" }}
       >
         <div className="container">
           <Link to={"/"} className="navbar-brand">
-            LuxoFoot
+            <img src="./assets/Logo 2.0.png" alt="logo" width={100} />
           </Link>
           <button
             className="navbar-toggler"
@@ -57,7 +57,7 @@ const Navbar = ({ onCart }) => {
               <NavLink to={"/cart"}>
                 <img
                   className="me-2"
-                  src="../assets/cart.png"
+                  src="../assets/Cart Black.png"
                   alt="cart"
                   height="30px"
                   width="30px"
