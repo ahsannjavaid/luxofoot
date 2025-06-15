@@ -46,7 +46,7 @@ const ProductCard = (props) => {
             className="text-truncate"
             style={productCardDescriptionTextStyle}
           >
-            <span className="card-text">Made in {props.desc}</span>
+            <span className="card-text">{props.desc}</span>
           </div>
           <button onClick={() => AddToCart(props.id)} className="btn btn-dark">
             Add to Cart

@@ -6,7 +6,8 @@ import { toastErrorObject } from './toast';
 export async function fetchData(setData, setIsLoading, req, bodyData) {
   try {
     let res;
-    res = await fetchResponse(productEndpoints.getProducts(), 0, bodyData);
+    if (req) res = await fetchResponse(productEndpoints.getProductDetails(bodyData), 0, null);
+    else res = await fetchResponse(productEndpoints.getProducts(), 0, bodyData);
     const resData = res.data;
     if (!res.success) {
       toast.error(res.message, toastErrorObject);
@@ -14,6 +15,10 @@ export async function fetchData(setData, setIsLoading, req, bodyData) {
       return;
     }
     console.log('Log data', resData);
+    if (req) {
+      const images = new Array(5).fill(`${process.env.REACT_APP_API_URL}product/get-photo/${bodyData}`);
+      resData.images = images;
+    }
     setData(resData);
     setIsLoading(false);
   } catch (error) {
